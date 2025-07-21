@@ -17,7 +17,9 @@ function Navbar() {
     <nav className={styles.navbar}>
       <ul>
         <li id="inicio">
-          <a href="/">Conecta2</a>
+          <a className={styles.mi_app} href="/">
+            Mi App
+          </a>
         </li>
 
         {isLoggedIn ? (
@@ -35,7 +37,7 @@ function Navbar() {
         ) : (
           <>
             <li id="login">
-              <Link to="/login">Login</Link>{" "}
+              <Link to="/login">Iniciar Sesión</Link>{" "}
             </li>
           </>
         )}

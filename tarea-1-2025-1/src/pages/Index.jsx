@@ -4,11 +4,12 @@
  * y mencionar que cosas puede hacer un usuario.
  */
 import Navbar from "../Components/Navbar";
+import styles from "./Index.module.css"; // Asegúrate de tener un archivo CSS para estilos
 
 function Index() {
   return (
     <>
-      <h1>Bienvenido a Conecta2</h1>
+      <h1 className={styles.title}>¡Bienvenido a Tarea 1!</h1>
     </>
   );
 }
