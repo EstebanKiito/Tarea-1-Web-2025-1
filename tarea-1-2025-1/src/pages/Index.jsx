@@ -3,15 +3,14 @@
  * Aquí deberán colocar un mensaje de bienvenida a su página
  * y mencionar que cosas puede hacer un usuario.
  */
-import Navbar from "../Components/Navbar"
+import Navbar from "../Components/Navbar";
 
 function Index() {
   return (
     <>
-      <Navbar />
       <h1>Bienvenido a Conecta2</h1>
     </>
-  )
+  );
 }
 
-export default Index
+export default Index;

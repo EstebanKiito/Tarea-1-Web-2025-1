@@ -7,43 +7,38 @@
 import React from "react";
 import "./styles.css"; // Asegúrate de tener un archivo CSS para estilos
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import styles from "./Navbar.module.css"; // Importa el CSS del componente
 
 function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
 
   return (
-    <nav>
+    <nav className={styles.navbar}>
       <ul>
         <li id="inicio">
           <a href="/">Conecta2</a>
         </li>
-        <div className="nav-links">
-          {isLoggedIn && (
+
+        {isLoggedIn ? (
+          <>
             <li id="perfil">
-              <a href="/profile">Mi Perfil</a>
+              <Link to="/profile">Perfil</Link>{" "}
             </li>
-          )}
-          {isLoggedIn && (
             <li id="perfil">
-              <a href="/profile">Posts</a>
+              <Link to="/posts">Posts</Link>
             </li>
-          )}
-          {isLoggedIn && (
-            <li id="perfil">
+            <li id="close-session">
               <a href="/profile">Cerrar Sesión</a>
             </li>
-          )}
-          {!isLoggedIn && (
+          </>
+        ) : (
+          <>
             <li id="login">
-              <a href="/login">Iniciar Sesión</a>
+              <Link to="/login">Login</Link>{" "}
             </li>
-          )}
-          {!isLoggedIn && (
-            <li id="register">
-              <a href="/register">Registrarse</a>
-            </li>
-          )}
-        </div>
+          </>
+        )}
       </ul>
     </nav>
   );
