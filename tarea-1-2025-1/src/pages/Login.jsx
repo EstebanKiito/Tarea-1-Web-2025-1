@@ -79,7 +79,6 @@ function Login({ setIsLoggedIn, isLoggedIn }) {
               </button>
             </form>
           </div>
-          <h1>{isLoggedIn ? "Bienvenido" : "Por favor inicia sesión"}</h1>
         </>
       )}
     </>

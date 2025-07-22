@@ -11,6 +11,9 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const handleLogin = (status) => {
     setIsLoggedIn(status);
+    if (!status) {
+      alert("Credenciales incorrectas. Intenta nuevamente.");
+    }
   };
 
   return (
