@@ -11,38 +11,34 @@ import { Link } from "react-router-dom";
 import styles from "./Navbar.module.css"; // Importa el CSS del componente
 
 function Navbar() {
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   return (
-    <nav className={styles.navbar}>
-      <ul>
-        <li id="inicio">
-          <a className={styles.mi_app} href="/">
-            Mi App
-          </a>
-        </li>
+    <ul className={styles.navbar}>
+      <li className={styles.logo} id="inicio">
+        <a href="/">Mi App</a>
+      </li>
 
-        {isLoggedIn ? (
-          <>
-            <li id="perfil">
-              <Link to="/profile">Perfil</Link>{" "}
-            </li>
-            <li id="perfil">
-              <Link to="/posts">Posts</Link>
-            </li>
-            <li id="close-session">
-              <a href="/profile">Cerrar Sesión</a>
-            </li>
-          </>
-        ) : (
-          <>
-            <li id="login">
-              <Link to="/login">Iniciar Sesión</Link>{" "}
-            </li>
-          </>
-        )}
-      </ul>
-    </nav>
+      {isLoggedIn ? (
+        <>
+          <li id="perfil">
+            <Link to="/profile">Perfil</Link>{" "}
+          </li>
+          <li id="perfil">
+            <Link to="/posts">Posts</Link>
+          </li>
+          <li id="close-session">
+            <a href="/profile">Cerrar Sesión</a>
+          </li>
+        </>
+      ) : (
+        <>
+          <li className={styles.login} id="login">
+            <Link to="/login">Iniciar Sesión</Link>{" "}
+          </li>
+        </>
+      )}
+    </ul>
   );
 }
 
