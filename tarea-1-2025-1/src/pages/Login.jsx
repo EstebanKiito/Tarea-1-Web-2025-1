@@ -35,6 +35,8 @@ function Login({ setIsLoggedIn, isLoggedIn }) {
         setIsLoggedIn(false);
       }
       const { token, ...userData } = response.data;
+      localStorage.setItem("token", token);
+      localStorage.setItem("userData", JSON.stringify(userData));
       console.log("Usuario autenticado:", userData);
       setIsLoggedIn(true);
       navigate("/posts");

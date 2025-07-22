@@ -14,7 +14,11 @@ function Navbar({ isLoggedIn }) {
   return (
     <ul className={styles.navbar}>
       <li className={styles.logo} id="inicio">
-        <a href="/">Mi App</a>
+        {isLoggedIn ? (
+          <Link to="/posts">Mi App</Link>
+        ) : (
+          <Link to="/">Mi App</Link>
+        )}
       </li>
 
       {isLoggedIn ? (
@@ -26,7 +30,16 @@ function Navbar({ isLoggedIn }) {
             <Link to="/posts">Posts</Link>
           </li>
           <li id="close-session">
-            <a href="/profile">Cerrar Sesión</a>
+            <a
+              href="/"
+              onClick={() => {
+                localStorage.removeItem("token");
+                localStorage.removeItem("userData");
+                setIsLoggedIn(false);
+              }}
+            >
+              Cerrar Sesión
+            </a>
           </li>
         </>
       ) : (

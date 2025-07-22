@@ -6,6 +6,7 @@ import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import Posts from "./pages/Posts";
 import { useState } from "react";
+import ProtectedRoute from "./Components/ProtectedRoute";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -28,7 +29,14 @@ function App() {
           }
         />
         <Route path="/profile" element={<Profile />} />
-        <Route path="/posts" element={<Posts isLoggedIn={isLoggedIn} />} />
+        <Route
+          path="/posts"
+          element={
+            <ProtectedRoute>
+              <Posts isLoggedIn={isLoggedIn} />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </>
   );
