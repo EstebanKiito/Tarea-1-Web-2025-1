@@ -9,7 +9,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-function Login({ setIsLoggedIn, isLoggedIn }) {
+function Login({ setIsLoggedIn, isLoggedIn, setData }) {
   const navigate = useNavigate();
   const url = "'https://dummyjson.com/user/login'";
   const [username, setUsername] = useState("");
@@ -35,9 +35,11 @@ function Login({ setIsLoggedIn, isLoggedIn }) {
         setIsLoggedIn(false);
       }
       const { token, ...userData } = response.data;
+
       localStorage.setItem("token", token);
-      localStorage.setItem("userData", JSON.stringify(userData));
-      console.log("Usuario autenticado:", userData);
+      //localStorage.setItem("userData", JSON.stringify(userData));
+
+      setData(userData);
       setIsLoggedIn(true);
       navigate("/posts");
     } catch (err) {

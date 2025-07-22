@@ -10,6 +10,8 @@ import ProtectedRoute from "./Components/ProtectedRoute";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [data, setData] = useState(null);
+
   const handleLogin = (status) => {
     setIsLoggedIn(status);
     if (!status) {
@@ -25,14 +27,18 @@ function App() {
         <Route
           path="/login"
           element={
-            <Login setIsLoggedIn={handleLogin} isLoggedIn={isLoggedIn} />
+            <Login
+              setData={setData}
+              setIsLoggedIn={handleLogin}
+              isLoggedIn={isLoggedIn}
+            />
           }
         />
         <Route
           path="/profile"
           element={
             <ProtectedRoute>
-              <Profile />
+              <Profile data={data} />
             </ProtectedRoute>
           }
         />
