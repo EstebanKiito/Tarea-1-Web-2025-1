@@ -28,7 +28,14 @@ function App() {
             <Login setIsLoggedIn={handleLogin} isLoggedIn={isLoggedIn} />
           }
         />
-        <Route path="/profile" element={<Profile />} />
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          }
+        />
         <Route
           path="/posts"
           element={
