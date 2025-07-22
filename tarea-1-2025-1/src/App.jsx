@@ -28,7 +28,7 @@ function App() {
           }
         />
         <Route path="/profile" element={<Profile />} />
-        <Route path="/posts" element={<Posts />} />
+        <Route path="/posts" element={<Posts isLoggedIn={isLoggedIn} />} />
       </Routes>
     </>
   );

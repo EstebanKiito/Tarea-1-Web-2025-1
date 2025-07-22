@@ -5,8 +5,13 @@
  * Además, debe tener un botón que permita que los usuarios agreguen un nuevo post.
  */
 
-function Posts() {
-  return <div>Posts</div>;
+function Posts(isLoggedIn) {
+  return (
+    <div>
+      <h1>Posts</h1>
+      {isLoggedIn && <button>Agregar nuevo post</button>}
+    </div>
+  );
 }
 
 export default Posts;
