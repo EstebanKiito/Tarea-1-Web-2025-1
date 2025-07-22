@@ -7,12 +7,14 @@
 import styles from "./Login.module.css"; // Asegúrate de tener un archivo CSS para estilos
 import { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-function Login() {
+function Login({ setIsLoggedIn, isLoggedIn }) {
+  const navigate = useNavigate();
   const url = "'https://dummyjson.com/user/login'";
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  //const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -35,6 +37,7 @@ function Login() {
       const { token, ...userData } = response.data;
       console.log("Usuario autenticado:", userData);
       setIsLoggedIn(true);
+      navigate("/posts");
     } catch (err) {
       setError("Credenciales incorrectas. Intenta nuevamente.");
       console.error("Error al iniciar sesión:", error);
@@ -46,33 +49,39 @@ function Login() {
 
   return (
     <>
-      <div className={styles.login_container}>
-        <form>
-          <h2>Iniciar Sesión</h2>
-          <input
-            type="text"
-            id="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            name="username"
-            placeholder="Nombre de usuario"
-            required
-          />
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            name="password"
-            placeholder="Contraseña"
-            required
-          />
-          <button onClick={handleSubmit} type="submit">
-            Entrar
-          </button>
-        </form>
-      </div>
-      <h1>{isLoggedIn ? "Bienvenido" : "Por favor inicia sesión"}</h1>
+      {isLoggedIn ? (
+        <h3>Bienvenid@ {username}!</h3>
+      ) : (
+        <>
+          <div className={styles.login_container}>
+            <form>
+              <h2>Iniciar Sesión</h2>
+              <input
+                type="text"
+                id="username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                name="username"
+                placeholder="Nombre de usuario"
+                required
+              />
+              <input
+                type="password"
+                id="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                name="password"
+                placeholder="Contraseña"
+                required
+              />
+              <button onClick={handleSubmit} type="submit">
+                Entrar
+              </button>
+            </form>
+          </div>
+          <h1>{isLoggedIn ? "Bienvenido" : "Por favor inicia sesión"}</h1>
+        </>
+      )}
     </>
   );
 }

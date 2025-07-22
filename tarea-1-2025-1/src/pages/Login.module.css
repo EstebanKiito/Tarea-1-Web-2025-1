@@ -50,3 +50,9 @@ button {
 button :hover {
   background-color: #014f87;
 }
+
+h3 {
+  text-align: center;
+  color: #0160a4;
+  font-size: 1.2rem;
+}

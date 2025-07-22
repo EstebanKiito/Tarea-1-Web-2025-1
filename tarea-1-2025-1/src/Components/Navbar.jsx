@@ -10,9 +10,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "./Navbar.module.css"; // Importa el CSS del componente
 
-function Navbar() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
+function Navbar({ isLoggedIn }) {
   return (
     <ul className={styles.navbar}>
       <li className={styles.logo} id="inicio">
