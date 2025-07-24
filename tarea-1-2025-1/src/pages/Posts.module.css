@@ -40,3 +40,12 @@
   font-size: 1.6rem;
   font-weight: bold;
 }
+
+.post_card footer {
+  display: flex;
+}
+
+.post_card footer p {
+  margin-right: 1rem;
+  color: #555;
+}

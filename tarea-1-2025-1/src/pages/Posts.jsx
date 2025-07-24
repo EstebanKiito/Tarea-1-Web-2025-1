@@ -46,18 +46,25 @@ function Posts() {
     <div className={styles.post_container}>
       <div className={styles.post_add}>
         {isLoggedIn && <button className={styles.add_button}>+</button>}
-        <p>¿Que quieres compartir?</p>
+        <p style={{ fontWeight: "lighter" }}>¿Que quieres compartir?</p>
       </div>
       <div className={styles.post_list}>
         {posts.map((post) => (
           <div className={styles.post_card}>
             <ul>
               <li key={post.id}>
+                <strong>Autor:</strong> {post.userId}
                 <p className={styles.post_title}>{post.title}</p>
                 <p>{post.body}</p>
-                <p>
-                  <strong>Autor:</strong> {post.userId}
+                <p style={{ color: "#6d76af" }}>
+                  #{post.tags.map((tag) => ` ${tag} `)}
                 </p>
+                <hr />
+                <footer>
+                  <p>{post.reactions.likes} 👍</p>
+                  <p>{post.reactions.dislikes} 👎</p>
+                  <p>{post.views} 👀</p>
+                </footer>
               </li>
             </ul>
           </div>
