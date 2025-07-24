@@ -7,6 +7,13 @@ function EditProfileModal({ setShowModal, data, setData }) {
   console.log("EditProfileModal data:", data);
   console.log("EditProfileModal formData:", formData);
 
+  const handlerSubmit = (e) => {
+    e.preventDefault();
+    setData(formData);
+    localStorage.setItem("userData", JSON.stringify(formData));
+    setShowModal(false);
+  };
+
   return (
     <>
       <div className={styles.profile_container}>
@@ -22,18 +29,34 @@ function EditProfileModal({ setShowModal, data, setData }) {
             type="text"
             name="firstName"
             value={formData.firstName}
+            onChange={(e) =>
+              setFormData({ ...formData, firstName: e.target.value })
+            }
             required
           />
           <input
             type="text"
             name="lastName"
             value={formData.lastName}
+            onChange={(e) =>
+              setFormData({ ...formData, lastName: e.target.value })
+            }
             required
           />
-          <input type="email" name="email" value={formData.email} required />
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={(e) =>
+              setFormData({ ...formData, email: e.target.value })
+            }
+            required
+          />
 
           <div className={styles.button_container}>
-            <button type="submit">Actualizar</button>
+            <button type="submit" onClick={handlerSubmit}>
+              Actualizar
+            </button>
             <button
               className={styles.cancelar}
               type="reset"

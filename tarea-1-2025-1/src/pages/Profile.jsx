@@ -19,6 +19,10 @@ function Profile() {
     }
   }, []);
 
+  if (data) {
+    console.log("Profile data:", data.firstName, data.lastName, data.email);
+  }
+
   /**
    * La línea actúa como una "protección" (guard clause)
    * para evitar que el componente intente usar datos que aún no existen.
