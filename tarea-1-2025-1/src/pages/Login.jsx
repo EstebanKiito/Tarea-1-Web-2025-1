@@ -37,7 +37,8 @@ function Login({ setIsLoggedIn, isLoggedIn, setData }) {
       const { token, ...userData } = response.data;
 
       localStorage.setItem("token", token);
-      //localStorage.setItem("userData", JSON.stringify(userData));
+      localStorage.setItem("userData", JSON.stringify(userData));
+      localStorage.setItem("isLoggedIn", true);
 
       setData(userData);
       setIsLoggedIn(true);

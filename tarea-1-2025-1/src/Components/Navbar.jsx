@@ -10,7 +10,9 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "./Navbar.module.css"; // Importa el CSS del componente
 
-function Navbar({ isLoggedIn }) {
+function Navbar() {
+  const isLoggedIn = localStorage.getItem("isLoggedIn");
+
   return (
     <ul className={styles.navbar}>
       <li className={styles.logo} id="inicio">
@@ -35,7 +37,7 @@ function Navbar({ isLoggedIn }) {
               onClick={() => {
                 localStorage.removeItem("token");
                 localStorage.removeItem("userData");
-                setIsLoggedIn(false);
+                localStorage.removeItem("isLoggedIn");
               }}
             >
               Cerrar Sesión
