@@ -45,14 +45,13 @@ function Posts() {
   return (
     <div className={styles.post_container}>
       <div className={styles.post_add}>
-        {isLoggedIn && (
-          <button className={styles.add_button}>Agregar nuevo post</button>
-        )}
+        {isLoggedIn && <button className={styles.add_button}>+</button>}
+        <p>¿Que quieres compartir?</p>
       </div>
       <div className={styles.post_list}>
-        <ul>
-          {posts.map((post) => (
-            <div className={styles.posts}>
+        {posts.map((post) => (
+          <div className={styles.post_card}>
+            <ul>
               <li key={post.id}>
                 <p className={styles.post_title}>{post.title}</p>
                 <p>{post.body}</p>
@@ -60,9 +59,9 @@ function Posts() {
                   <strong>Autor:</strong> {post.userId}
                 </p>
               </li>
-            </div>
-          ))}
-        </ul>
+            </ul>
+          </div>
+        ))}
       </div>
     </div>
   );
