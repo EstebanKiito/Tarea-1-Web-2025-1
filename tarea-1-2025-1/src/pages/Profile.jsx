@@ -5,9 +5,11 @@
 
 import { useState, useEffect } from "react";
 import styles from "./Profile.module.css"; // Asegúrate de tener un archivo CSS para estilos
+import EditProfileModal from "../Components/EditProfileModal"; // Asegúrate de que la ruta sea correcta
 
 function Profile() {
   const [data, setData] = useState(null);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     // Obtener datos del localStorage
@@ -28,22 +30,31 @@ function Profile() {
   }
 
   return (
-    <div className={styles.profile_container}>
-      <div className={styles.profile_info}>
-        <h2>Mi Perfil</h2>
-        <img src={data.image} alt="Perfil" className={styles.profile_image} />
-        <p>
-          <strong>Nombre:</strong> {data.firstName} {data.lastName}
-        </p>
-        <p>
-          <strong>Email:</strong> {data.email}
-        </p>
-        <p>
-          <strong>Usuario:</strong> {data.username}
-        </p>
-        <button type="submit">Editar Perfil</button>
+    <>
+      <div className={styles.profile_container}>
+        <div className={styles.profile_info}>
+          <h2>Mi Perfil</h2>
+          <img src={data.image} alt="Perfil" className={styles.profile_image} />
+          <p>
+            <strong>Nombre:</strong> {data.firstName} {data.lastName}
+          </p>
+          <p>
+            <strong>Email:</strong> {data.email}
+          </p>
+          <p>
+            <strong>Usuario:</strong> {data.username}
+          </p>
+          <button onClick={() => setShowModal(true)}>Editar Perfil</button>
+        </div>
       </div>
-    </div>
+      {showModal && (
+        <EditProfileModal
+          setShowModal={setShowModal}
+          data={data}
+          setData={setData}
+        />
+      )}
+    </>
   );
 }
 
