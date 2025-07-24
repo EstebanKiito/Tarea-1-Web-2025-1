@@ -1,0 +1,16 @@
+.post_card {
+  background-color: #f9f9f9;
+  border-radius: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  margin-top: 3rem;
+  padding: 3rem;
+}
+
+.post_card footer {
+  display: flex;
+}
+
+.post_card footer p {
+  margin-right: 1rem;
+  color: #555;
+}

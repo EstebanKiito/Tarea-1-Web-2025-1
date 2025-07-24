@@ -8,6 +8,7 @@
 import { useState, useEffect } from "react";
 import styles from "./Posts.module.css"; // Asegúrate de tener un archivo CSS para estilos
 import axios from "axios";
+import InfoCard from "../Components/InfoCard";
 
 function Posts() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -50,24 +51,18 @@ function Posts() {
       </div>
       <div className={styles.post_list}>
         {posts.map((post) => (
-          <div className={styles.post_card}>
-            <ul>
-              <li key={post.id}>
-                <strong>Autor:</strong> {post.userId}
-                <p className={styles.post_title}>{post.title}</p>
-                <p>{post.body}</p>
-                <p style={{ color: "#6d76af" }}>
-                  #{post.tags.map((tag) => ` ${tag} `)}
-                </p>
-                <hr />
-                <footer>
-                  <p>{post.reactions.likes} 👍</p>
-                  <p>{post.reactions.dislikes} 👎</p>
-                  <p>{post.views} 👀</p>
-                </footer>
-              </li>
-            </ul>
-          </div>
+          <InfoCard
+            key={post.id}
+            userId={post.userId}
+            title={post.title}
+            body={post.body}
+            author={post.author}
+            tags={post.tags}
+            likes={post.reactions.likes}
+            dislikes={post.reactions.dislikes}
+            views={post.views}
+            image={post.image}
+          />
         ))}
       </div>
     </div>
