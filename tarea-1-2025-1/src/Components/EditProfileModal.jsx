@@ -4,8 +4,6 @@ import styles from "./EditProfileModal.module.css"; // Asegúrate de tener un ar
 
 function EditProfileModal({ setShowModal, data, setData }) {
   const [formData, setFormData] = useState({ ...data });
-  console.log("EditProfileModal data:", data);
-  console.log("EditProfileModal formData:", formData);
 
   const handlerSubmit = (e) => {
     e.preventDefault();
