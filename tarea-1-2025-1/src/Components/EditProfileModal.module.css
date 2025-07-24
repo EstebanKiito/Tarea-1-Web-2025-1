@@ -22,10 +22,18 @@
   align-items: center;
 }
 
+.profile_info h2 {
+  color: #0160a4;
+  font-size: 1.6rem;
+  margin-top: 1rem;
+}
+
 .profile_info input {
   border: 1px solid #ccc;
-  border-radius: 5px;
   width: 90%;
+  padding: 0.5rem;
+  border-radius: 8px;
+  margin-top: 1.3rem;
 }
 
 .profile_info img {
@@ -36,12 +44,15 @@
 }
 
 .profile_info button {
-  align-items: center;
-  margin-top: 10px;
-  padding: 10px 20px;
-  color: white;
+  padding: 0.6rem 1.3rem;
   border: none;
-  display: inline-block;
+  color: white;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-top: 5%;
+  margin-bottom: 5%;
+  font-weight: bold;
   cursor: pointer;
 }
 
@@ -53,4 +64,8 @@
 
 .cancelar {
   background-color: #aba2a2;
+}
+
+.actualizar {
+  background-color: #0160a4;
 }

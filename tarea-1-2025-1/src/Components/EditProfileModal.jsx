@@ -52,7 +52,11 @@ function EditProfileModal({ setShowModal, data, setData }) {
           />
 
           <div className={styles.button_container}>
-            <button type="submit" onClick={handlerSubmit}>
+            <button
+              className={styles.actualizar}
+              type="submit"
+              onClick={handlerSubmit}
+            >
               Actualizar
             </button>
             <button
