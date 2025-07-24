@@ -21,10 +21,16 @@ function EditProfileModal({ setShowModal, data, setData }) {
           <input
             type="text"
             name="firstName"
-            placeholder={formData.firstName}
+            value={formData.firstName}
+            required
           />
-          <input type="text" name="lastName" placeholder={formData.lastName} />
-          <input type="email" name="email" placeholder={formData.email} />
+          <input
+            type="text"
+            name="lastName"
+            value={formData.lastName}
+            required
+          />
+          <input type="email" name="email" value={formData.email} required />
 
           <div className={styles.button_container}>
             <button type="submit">Actualizar</button>
