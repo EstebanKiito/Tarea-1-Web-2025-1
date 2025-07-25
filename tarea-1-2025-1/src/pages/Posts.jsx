@@ -117,6 +117,7 @@ function Posts() {
           onClick={() => {
             setSkip(skip + 50);
             fetchPosts(skip + 50);
+            setPage(page + 1);
           }}
         >
           Cargar más
