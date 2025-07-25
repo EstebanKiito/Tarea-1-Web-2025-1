@@ -14,7 +14,7 @@ function Posts() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [posts, setPosts] = useState([]);
   const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true); // En caso de querer mostrar Esqueleto de carga
   const [error, setError] = useState(null);
   const url = "https://dummyjson.com/posts?limit=50&skip=";
   const [skip, setSkip] = useState(0);
@@ -32,6 +32,7 @@ function Posts() {
       console.log("Posts fetched:", response.data);
     } catch (err) {
       setError("Error al cargar los posts. Intenta nuevamente.");
+      console.error("Error al cargar los posts:", error);
       console.error("Error al cargar los posts:", err);
       setLoading(false);
     }
@@ -43,6 +44,7 @@ function Posts() {
       console.log("Users fetched:", response.data);
       setUsers(response.data.users);
     } catch (err) {
+      console.error("Error al cargar el usuario:", error);
       console.error("Error al cargar el usuario:", err);
     }
   };
