@@ -30,6 +30,15 @@ function Posts() {
     }
   };
 
+  const fetchUsers = async (id) => {
+    try {
+      const response = await axios.get(`https://dummyjson.com/users/${id}`);
+      return response.data.firstName;
+    } catch (err) {
+      console.error("Error al cargar el usuario:", err);
+    }
+  };
+
   useEffect(() => {
     // Simulación de verificación de sesión
     const session = localStorage.getItem("isLoggedIn");
@@ -53,7 +62,7 @@ function Posts() {
         {posts.map((post) => (
           <InfoCard
             key={post.id}
-            userId={post.userId}
+            username={post.userId}
             title={post.title}
             body={post.body}
             author={post.author}
