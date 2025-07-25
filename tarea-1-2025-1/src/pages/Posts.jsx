@@ -13,10 +13,11 @@ import InfoCard from "../Components/InfoCard";
 function Posts() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [posts, setPosts] = useState([]);
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState({});
   const [loading, setLoading] = useState(true); // En caso de querer mostrar Esqueleto de carga
   const [error, setError] = useState(null);
   const url = "https://dummyjson.com/posts?limit=50&skip=";
+  const urlUsers = "https://dummyjson.com/users?limit=208&skip="; // Son 208 usuarios en total que se pueden obtener
   const [skip, setSkip] = useState(0);
   const [page, setPage] = useState(1);
 
@@ -40,9 +41,15 @@ function Posts() {
 
   const fetchUsers = async () => {
     try {
-      const response = await axios.get("https://dummyjson.com/users");
-      console.log("Users fetched:", response.data);
-      setUsers(response.data.users);
+      const response = await axios.get(urlUsers);
+
+      // Convertimos el array de usuarios en un objeto { id: username }
+      const UsersData = response.data.users.reduce((acc, user) => {
+        acc[user.id] = user.firstName + " " + user.lastName; // Combina nombre y apellido
+        return acc;
+      }, {});
+
+      setUsers(UsersData);
     } catch (err) {
       console.error("Error al cargar el usuario:", error);
       console.error("Error al cargar el usuario:", err);
@@ -92,7 +99,7 @@ function Posts() {
         {posts.map((post) => (
           <InfoCard
             key={post.id}
-            username={post.userId}
+            username={users[post.userId] || "Desconocido"}
             title={post.title}
             body={post.body}
             author={post.author}
