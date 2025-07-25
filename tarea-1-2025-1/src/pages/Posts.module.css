@@ -32,3 +32,28 @@
   font-size: 1.6rem;
   font-weight: bold;
 }
+
+.load_more {
+  display: block;
+  margin: 2rem auto;
+  padding: 0.6rem 1.3rem;
+  border: none;
+  background-color: #1680cb;
+  color: white;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  font-weight: bold;
+  cursor: pointer;
+}
+.load_more:hover {
+  background-color: #014f8c;
+  transform: scale(1.05);
+}
+
+.scroll_container {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+  gap: 3rem;
+}

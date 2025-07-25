@@ -13,16 +13,23 @@ import InfoCard from "../Components/InfoCard";
 function Posts() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [posts, setPosts] = useState([]);
+  const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const url = "https://dummyjson.com/posts";
+  const url = "https://dummyjson.com/posts?limit=50&skip=";
+  const [skip, setSkip] = useState(0);
+  const [page, setPage] = useState(1);
 
-  const fetchPosts = async () => {
+  const fetchPosts = async (skip = 0) => {
+    if (skip > 252 || skip < 0) {
+      setSkip(0); // Reinicia el skip si se supera el límite
+      return; // Evita hacer más solicitudes si ya se han cargado todos los posts
+    }
     try {
-      const response = await axios.get(url);
+      const response = await axios.get(url + skip);
       setPosts(response.data.posts);
       setLoading(false);
-      console.log("Posts fetched:", response.data.posts);
+      console.log("Posts fetched:", response.data);
     } catch (err) {
       setError("Error al cargar los posts. Intenta nuevamente.");
       console.error("Error al cargar los posts:", err);
@@ -30,10 +37,11 @@ function Posts() {
     }
   };
 
-  const fetchUsers = async (id) => {
+  const fetchUsers = async () => {
     try {
-      const response = await axios.get(`https://dummyjson.com/users/${id}`);
-      return response.data.firstName;
+      const response = await axios.get("https://dummyjson.com/users");
+      console.log("Users fetched:", response.data);
+      setUsers(response.data.users);
     } catch (err) {
       console.error("Error al cargar el usuario:", err);
     }
@@ -45,18 +53,38 @@ function Posts() {
     setIsLoggedIn(session === "true");
     if (session === "true") {
       fetchPosts();
+      fetchUsers();
     }
   }, []);
-
-  const fakePosts = [
-    { id: 1, title: "Post 1", content: "Contenido del post 1" },
-  ];
 
   return (
     <div className={styles.post_container}>
       <div className={styles.post_add}>
         {isLoggedIn && <button className={styles.add_button}>+</button>}
         <p style={{ fontWeight: "lighter" }}>¿Que quieres compartir?</p>
+      </div>
+      <div className={styles.scroll_container}>
+        <button
+          onClick={() => {
+            setPage(page - 1);
+            setSkip(skip - 50);
+            fetchPosts(skip - 50);
+          }}
+          disabled={page <= 1}
+        >
+          Anterior
+        </button>
+        <p>{page}</p>
+        <button
+          onClick={() => {
+            setPage(page + 1);
+            setSkip(skip + 50);
+            fetchPosts(skip + 50);
+          }}
+          disabled={page >= 6} // Asumiendo que hay 300 posts y cada página muestra 50
+        >
+          Siguiente
+        </button>
       </div>
       <div className={styles.post_list}>
         {posts.map((post) => (
@@ -74,6 +102,17 @@ function Posts() {
           />
         ))}
       </div>
+      {page < 6 && (
+        <button
+          className={styles.load_more}
+          onClick={() => {
+            setSkip(skip + 50);
+            fetchPosts(skip + 50);
+          }}
+        >
+          Cargar más
+        </button>
+      )}
     </div>
   );
 }
