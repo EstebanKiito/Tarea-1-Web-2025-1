@@ -1,9 +1,18 @@
 // componente utilizado para editar los datos básicos de un usuario.
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "./EditProfileModal.module.css"; // Asegúrate de tener un archivo CSS para estilos
 
 function EditProfileModal({ setShowModal, data, setData }) {
   const [formData, setFormData] = useState({ ...data });
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      // Crear una URL temporal para mostrar la imagen
+      const imageUrl = URL.createObjectURL(file);
+      setFormData({ ...formData, image: imageUrl });
+    }
+  };
 
   const handlerSubmit = (e) => {
     e.preventDefault();
@@ -22,7 +31,12 @@ function EditProfileModal({ setShowModal, data, setData }) {
             alt="Perfil"
             className={styles.profile_image}
           />
-          <input type="file" name="image" />
+          <input
+            type="file"
+            name="image"
+            accept="image/*"
+            onChange={handleImageChange}
+          />
           <input
             type="text"
             name="firstName"
