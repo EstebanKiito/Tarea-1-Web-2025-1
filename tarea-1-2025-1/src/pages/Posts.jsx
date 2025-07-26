@@ -9,6 +9,7 @@ import { useState, useEffect } from "react";
 import styles from "./Posts.module.css"; // Asegúrate de tener un archivo CSS para estilos
 import axios from "axios";
 import InfoCard from "../Components/InfoCard";
+import PostInfoModal from "../Components/PostInfoModal";
 
 function Posts() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -74,63 +75,72 @@ function Posts() {
   }, []);
 
   return (
-    <div className={styles.post_container}>
-      <div className={styles.post_add}>
-        {isLoggedIn && <button className={styles.add_button}>+</button>}
-        <p style={{ fontWeight: "lighter" }}>¿Que quieres compartir?</p>
-      </div>
-      <div className={styles.scroll_container}>
-        <button
-          onClick={() => {
-            setPage(page - 1);
-            setSkip(skip - 50);
-            fetchPosts(skip - 50);
-          }}
-          disabled={page <= 1}
-        >
-          Anterior
-        </button>
-        <p>{page}</p>
-        <button
-          onClick={() => {
-            setPage(page + 1);
-            setSkip(skip + 50);
-            fetchPosts(skip + 50);
-          }}
-          disabled={page >= 6} // Asumiendo que hay 300 posts y cada página muestra 50
-        >
-          Siguiente
-        </button>
-      </div>
-      <div className={styles.post_list}>
-        {posts.map((post) => (
-          <InfoCard
-            key={post.id}
-            title={post.title}
-            body={post.body}
-            author={users[post.userId] || "Desconocido"}
-            tags={post.tags}
-            likes={post.reactions.likes}
-            dislikes={post.reactions.dislikes}
-            views={post.views}
-            image={post.image}
-            onClick={() => handlePostClick(post)}
-          />
-        ))}
-      </div>
-      {page < 6 && (
-        <button
-          className={styles.load_more}
-          onClick={() => {
-            setSkip(skip + 50);
-            fetchPosts(skip + 50);
-            setPage(page + 1);
-          }}
-        >
-          Cargar más
-        </button>
+    <>
+      {modalOpen && selectedPost && (
+        <PostInfoModal
+          post={selectedPost}
+          author={users[selectedPost.userId] || "Desconocido"}
+          onClose={() => setModalOpen(false)}
+        />
       )}
-    </div>
+      <div className={styles.post_container}>
+        <div className={styles.post_add}>
+          {isLoggedIn && <button className={styles.add_button}>+</button>}
+          <p style={{ fontWeight: "lighter" }}>¿Que quieres compartir?</p>
+        </div>
+        <div className={styles.scroll_container}>
+          <button
+            onClick={() => {
+              setPage(page - 1);
+              setSkip(skip - 50);
+              fetchPosts(skip - 50);
+            }}
+            disabled={page <= 1}
+          >
+            Anterior
+          </button>
+          <p>{page}</p>
+          <button
+            onClick={() => {
+              setPage(page + 1);
+              setSkip(skip + 50);
+              fetchPosts(skip + 50);
+            }}
+            disabled={page >= 6} // Asumiendo que hay 300 posts y cada página muestra 50
+          >
+            Siguiente
+          </button>
+        </div>
+        <div className={styles.post_list}>
+          {posts.map((post) => (
+            <InfoCard
+              key={post.id}
+              title={post.title}
+              body={post.body}
+              author={users[post.userId] || "Desconocido"}
+              tags={post.tags}
+              likes={post.reactions.likes}
+              dislikes={post.reactions.dislikes}
+              views={post.views}
+              image={post.image}
+              onClick={() => handlePostClick(post)}
+            />
+          ))}
+        </div>
+        {page < 6 && (
+          <button
+            className={styles.load_more}
+            onClick={() => {
+              setSkip(skip + 50);
+              fetchPosts(skip + 50);
+              setPage(page + 1);
+            }}
+          >
+            Cargar más
+          </button>
+        )}
+      </div>
+    </>
   );
 }
 
