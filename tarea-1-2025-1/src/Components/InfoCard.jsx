@@ -6,7 +6,6 @@ import styles from "./InfoCard.module.css"; // Asegúrate de tener un archivo CS
 
 function InfoCard({
   id,
-  username,
   title,
   body,
   author,
@@ -15,12 +14,13 @@ function InfoCard({
   dislikes,
   views,
   image,
+  onClick,
 }) {
   return (
-    <div className={styles.post_card}>
+    <div className={styles.post_card} onClick={onClick}>
       <ul>
         <li key={id}>
-          <strong>Autor:</strong> {username}
+          <strong>Autor:</strong> {author}
           <p className={styles.post_title}>{title}</p>
           <p>{body}</p>
           <p style={{ color: "#6d76af" }}>#{tags.map((tag) => ` ${tag} `)}</p>

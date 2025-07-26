@@ -20,6 +20,13 @@ function Posts() {
   const urlUsers = "https://dummyjson.com/users?limit=208&skip="; // Son 208 usuarios en total que se pueden obtener
   const [skip, setSkip] = useState(0);
   const [page, setPage] = useState(1);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [selectedPost, setSelectedPost] = useState(null);
+
+  const handlePostClick = (post) => {
+    setSelectedPost(post);
+    setModalOpen(true); // Abrir un Modal
+  };
 
   const fetchPosts = async (skip = 0) => {
     if (skip > 252 || skip < 0) {
@@ -99,15 +106,15 @@ function Posts() {
         {posts.map((post) => (
           <InfoCard
             key={post.id}
-            username={users[post.userId] || "Desconocido"}
             title={post.title}
             body={post.body}
-            author={post.author}
+            author={users[post.userId] || "Desconocido"}
             tags={post.tags}
             likes={post.reactions.likes}
             dislikes={post.reactions.dislikes}
             views={post.views}
             image={post.image}
+            onClick={() => handlePostClick(post)}
           />
         ))}
       </div>
